@@ -1,24 +1,7 @@
 package com.yrihr.crawler;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.TimeInterval;
-import cn.hutool.core.util.RandomUtil;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.yrihr.crawler.entry.Common;
-import com.yrihr.crawler.entry.Goods;
-import com.yrihr.crawler.entry.Order;
-import com.yrihr.crawler.entry.User;
-import com.yrihr.crawler.mapper.CommonMapper;
-import com.yrihr.crawler.mapper.OrderMapper;
-import com.yrihr.crawler.mapper.TestMapper;
-
-import com.yrihr.crawler.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 @SpringBootTest
 class CrawlerApplicationTests {
@@ -27,7 +10,7 @@ class CrawlerApplicationTests {
     void contextLoads() {
     }
 
-    @Autowired
+   /* @Autowired
     TestMapper testMapper;
 
     @Autowired
@@ -186,6 +169,6 @@ class CrawlerApplicationTests {
             test.setType(RandomUtil.randomString(10));
             commonMapper.insert(test);
         }
-    }
+    }*/
 
 }

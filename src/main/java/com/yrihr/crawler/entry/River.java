@@ -2,24 +2,21 @@ package com.yrihr.crawler.entry;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * @ClassName : Test
+ * @ClassName : River
  * @Description :
  * @Author : ws
- * @Date: 2021-05-08 09:13
+ * @Date: 2021-05-25 16:07
  * @Version 1.0
  */
 @Data
-public class Goods implements Serializable {
-
+public class River implements Serializable {
 
     private static final long serialVersionUID = -6332996061531597572L;
 
@@ -31,7 +28,7 @@ public class Goods implements Serializable {
 
 
     @ApiModelProperty(value = "用户id")
-        private Integer userId;
+    private Integer flows;
 
 
     @ApiModelProperty(value = "创建时间")
@@ -41,5 +38,4 @@ public class Goods implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-
 }
