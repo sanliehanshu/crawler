@@ -3,7 +3,6 @@ package com.yrihr.crawler;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.RandomUtil;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yrihr.crawler.entry.Common;
 import com.yrihr.crawler.entry.Goods;
@@ -12,7 +11,6 @@ import com.yrihr.crawler.entry.User;
 import com.yrihr.crawler.mapper.CommonMapper;
 import com.yrihr.crawler.mapper.OrderMapper;
 import com.yrihr.crawler.mapper.TestMapper;
-
 import com.yrihr.crawler.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,7 +119,7 @@ class CrawlerApplicationTests {
 
     @Test
     void addTest9(){
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 80; i++) {
             Goods test = new Goods();
             test.setName(RandomUtil.randomString(10));
             test.setUserId(RandomUtil.randomInt(1,40000000));
