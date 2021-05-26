@@ -2,9 +2,13 @@ package com.yrihr.crawler.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.yrihr.crawler.dto.RainDto;
 import com.yrihr.crawler.dto.RiverDto;
+import com.yrihr.crawler.entry.Rain;
 import com.yrihr.crawler.entry.River;
+import com.yrihr.crawler.service.RainService;
 import com.yrihr.crawler.service.RiverService;
+import com.yrihr.crawler.vo.RainVo;
 import com.yrihr.crawler.vo.RiverVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +32,7 @@ public class RiverController {
 
 
     private final RiverService riverService;
+    private final RainService rainService;
 
     @RequestMapping("/save")
     public ResponseEntity saveRiver(){
@@ -45,14 +50,37 @@ public class RiverController {
      * @param river
      * @return
      */
-    @RequestMapping("/selectPage")
-    public ResponseEntity selectPage(@RequestBody RiverDto river){
+    @RequestMapping("/selectRiverPage")
+    public ResponseEntity selectRiverPage(@RequestBody RiverDto river){
         if (river != null) {
             long current = river.getCurrent();
             long size = river.getSize();
             RiverVo riverVo = new RiverVo();
             riverVo.setFlows(river.getFlows());
             IPage<River> riverIPage = riverService.selectPage(current, size, riverVo);
+            if (riverIPage != null) {
+                return ResponseEntity.ok(riverIPage);
+            } else {
+                return (ResponseEntity) ResponseEntity.EMPTY;
+            }
+        } else {
+            return (ResponseEntity) ResponseEntity.badRequest();
+        }
+    }
+
+    /**
+     * 分库存储指定数据源分页 经过测试没有问题
+     * @param rainDto
+     * @return
+     */
+    @RequestMapping("/selectRainPage")
+    public ResponseEntity selectRainPage(@RequestBody RainDto rainDto){
+        if (rainDto != null) {
+            long current = rainDto.getCurrent();
+            long size = rainDto.getSize();
+            RainVo rainVo = new RainVo();
+            rainVo.setFlows(rainDto.getFlows());
+            IPage<Rain> riverIPage = rainService.selectPage(current, size, rainVo);
             if (riverIPage != null) {
                 return ResponseEntity.ok(riverIPage);
             } else {
