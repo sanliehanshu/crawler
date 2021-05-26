@@ -39,3 +39,15 @@ spring:
               shardingColumn: id
               # 分片算法行表达式，需符合groovy语法 '& Integer.MAX_VALUE' 位运算使hash值为正数
               algorithmExpression: river_$->{(id.hashCode() & Integer.MAX_VALUE) % 6}
+        test:
+          # 真实表 order_0
+          actualDataNodes: sharding-crawler.test_$->{0..2}
+          # 分库策略
+          databaseStrategy:
+            none:
+          # 分表策略
+          tableStrategy:
+            inline:
+              shardingColumn: id
+              # 分片算法行表达式，需符合groovy语法 '& Integer.MAX_VALUE' 位运算使hash值为正数
+              algorithmExpression: test_$->{(id.hashCode() & Integer.MAX_VALUE) % 3}
