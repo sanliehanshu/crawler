@@ -1,6 +1,5 @@
 package com.yrihr.crawler.task;
 
-import cn.hutool.core.date.DateUtil;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -15,6 +14,6 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 public class MyTask extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("测试的定时任务："+ DateUtil.now());
+//        System.out.println("测试的定时任务："+ DateUtil.now());
     }
 }

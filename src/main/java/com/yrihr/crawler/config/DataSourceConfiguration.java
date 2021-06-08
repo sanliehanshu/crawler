@@ -60,9 +60,7 @@ public class DataSourceConfiguration {
             public Map<String, DataSource> loadDataSources() {
                 Map<String, DataSource> dataSourceMap = createDataSourceMap(datasourceMap);
                 // 将 shardingjdbc 管理的数据源也交给动态数据源管理
-//                dataSourceMap.put(SHARDING_DATA_SOURCE_NAME, shardingDataSource);
                 dataSourceMap.put("sharding", shardingDataSource);
-                dataSourceMap.put("sharding1", shardingDataSource);
                 return dataSourceMap;
             }
         };

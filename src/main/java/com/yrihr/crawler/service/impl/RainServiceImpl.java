@@ -35,7 +35,7 @@ public class RainServiceImpl extends ServiceImpl<RainMapper, Rain> implements Ra
      * @return
      */
     @Override
-    @DS("sharding1")
+    @DS("sharding")
     public IPage<Rain> selectPage(long current, long size, RainVo river) {
         QueryWrapper<Rain> wrapper = new QueryWrapper();
         wrapper.orderByAsc("id");
