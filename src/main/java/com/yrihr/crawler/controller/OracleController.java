@@ -1,8 +1,10 @@
 package com.yrihr.crawler.controller;
 
 import cn.hutool.json.JSONObject;
+import com.yrihr.crawler.entry.DayHourRain;
 import com.yrihr.crawler.entry.DayRain;
 import com.yrihr.crawler.mapper.DayRainSiteIdMapper;
+import com.yrihr.crawler.service.DayHourRainService;
 import com.yrihr.crawler.service.DayRainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +32,10 @@ public class OracleController {
 
     private final DayRainSiteIdMapper dayRainSiteIdMapper;
     private final DayRainService dayRainService;
+    private final DayHourRainService dayHourRainService;
 
     final String url = "http://localhost:8088/api/oracle/listDayRainList";
+    final String dayHourUrl = "http://localhost:8088/api/oracle/listSummaryRainList";
 
     @RequestMapping("/saveBatchDayPP")
     public Object saveBatchDayPP(){
@@ -50,6 +54,33 @@ public class OracleController {
                     dayRain.setSiteId((String) map.get("siteId"));
                     dayRain.setRainfall((Double) map.get("rainfall"));
                     dayRainService.saveRiver(dayRain);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return siteIdList;
+    }
+
+
+    @RequestMapping("/saveBatchDayHourPP")
+    public Object saveBatchDayHourPP(){
+        List<String> siteIdList = dayRainSiteIdMapper.siteIdDayHourList();
+        for (int i = 0; i < siteIdList.size(); i++) {
+            System.out.println(siteIdList.get(i));
+            JSONObject json = new JSONObject();
+            json.putOpt("siteId",siteIdList.get(i));
+            Object[] listDayRain = new RestTemplate().postForObject(dayHourUrl, json, Object[].class);
+            for (int j = 0; j < listDayRain.length; j++) {
+                try {
+                    LinkedHashMap map = (LinkedHashMap) listDayRain[j];
+                    DayHourRain dayHourRain = new DayHourRain();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    dayHourRain.setStartTime(sdf.parse((String) map.get("startTime")));
+                    dayHourRain.setEndTime(sdf.parse((String) map.get("endTime")));
+                    dayHourRain.setSiteId((String) map.get("siteId"));
+                    dayHourRain.setRainfall((Double) map.get("rainfall"));
+                    dayHourRainService.saveRiver(dayHourRain);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

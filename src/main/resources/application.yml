@@ -88,4 +88,16 @@ spring:
               shardingColumn: id
               # 分片算法行表达式，需符合groovy语法 '& Integer.MAX_VALUE' 位运算使hash值为正数
               algorithmExpression: day_rain_$->{(id.hashCode() & Integer.MAX_VALUE) % 8}
+        day_hour_rain:
+          # 真实表 order_0
+          actualDataNodes: sharding-oracle.day_hour_rain_$->{0..7}
+          # 分库策略
+          databaseStrategy:
+            none:
+          # 分表策略
+          tableStrategy:
+            inline:
+              shardingColumn: id
+              # 分片算法行表达式，需符合groovy语法 '& Integer.MAX_VALUE' 位运算使hash值为正数
+              algorithmExpression: day_hour_rain_$->{(id.hashCode() & Integer.MAX_VALUE) % 8}
 

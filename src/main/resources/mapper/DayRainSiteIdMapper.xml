@@ -5,4 +5,9 @@
     <select id="siteIdList" resultType="java.lang.String">
         select site_id from hh_daypp order by id
     </select>
+
+
+    <select id="siteIdDayHourList" resultType="java.lang.String">
+        select site_id from hh_dayhourpp order by id
+    </select>
 </mapper>

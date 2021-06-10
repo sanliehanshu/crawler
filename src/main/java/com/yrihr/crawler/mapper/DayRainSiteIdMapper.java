@@ -15,8 +15,15 @@ import java.util.List;
 public interface DayRainSiteIdMapper extends BaseMapper<DayRainSiteId> {
 
     /**
-     * 站点id
+     * 逐日站点id
      * @return
      */
     List<String> siteIdList();
+
+
+    /**
+     * 降摘站点id
+     * @return
+     */
+    List<String> siteIdDayHourList();
 }
